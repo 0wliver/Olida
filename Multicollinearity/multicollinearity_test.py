@@ -113,9 +113,9 @@ model_contrast.summary()
 
 
 # ## 方差膨胀因子VIF ##
-# 每个自变量（外生变量, X）与其他自变量做OLS，获得其他自变量对于该自变量的R^2，R^2越大，VIF增大，说明该自变量存在被（线性）替代的可能
+# http://www.statsmodels.org/devel/generated/statsmodels.stats.outliers_influence.variance_inflation_factor.html <br />每个自变量（外生变量）与其他自变量做OLS，获得其他自变量对于该自变量的R^2，R^2越大则VIF越大，说明该自变量存在被（线性）替代的可能
 
-# ### 分别对旅游人数people, 公路里程miles_road, 铁路里程miles_rail变量、STEPWISE选择后的变量计算其VIF膨胀因子 ###
+# ### 分别对旅游人数+公路里程+铁路里程、STEPWISE选择后的变量计算其VIF膨胀因子 ###
 # 参考 https://blog.csdn.net/songhao22/article/details/79369950
 
 # In[8]:
@@ -140,7 +140,7 @@ for i, name in enumerate(data_stepwised.columns):
     # '格式'.format(变量) 输出法，.6表示保留六位长度，<^>为左中右对齐，20为强制长度
 
 
-# ### 注：VIF较大只是存在多重共线性的必要条件而非充分条件。即，若出现多重共线性，则VIF大，VIF大并不一定能推出一定存在多重共线性，只作为参考和验证###
+# ### 注：VIF较大只是存在多重共线性的必要条件而非充分条件。<br />即：若出现多重共线性，则VIF大，VIF大并不一定能推出一定存在多重共线性，只作为参考和验证###
 
 # In[10]:
 
