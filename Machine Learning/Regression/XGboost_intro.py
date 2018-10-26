@@ -21,6 +21,7 @@ from xgboost.sklearn import XGBRegressor
 # https://blog.csdn.net/PIPIXIU/article/details/80463565
 
 # 调参
+# https://blog.csdn.net/han_xiaoyang/article/details/52665396
 # https://blog.csdn.net/ruding/article/details/78328835
 # https://www.cnblogs.com/wanglei5205/p/8579244.html
 
