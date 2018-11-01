@@ -2,7 +2,7 @@
 
 from sklearn.datasets import load_boston
 
-from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 
 from sklearn.svm import LinearSVR
@@ -18,8 +18,8 @@ scaler_y = MinMaxScaler(feature_range=(0,1)).fit(y_raw.reshape(-1,1))
 X_std = scaler_x.transform(X_raw)
 y_std = scaler_y.transform(y_raw.reshape(-1,1)).ravel()
 
-X_train, X_test, y_train, y_test = train_test_split(X_raw, y_raw, test_size=0.33, random_state=31)
-X_train_std, X_test_std, y_train_std, y_test_std = train_test_split(X_std, y_std, test_size=0.33, random_state=31)
+X_train, X_test, y_train, y_test = train_test_split(X_raw, y_raw, test_size=0.33, random_state=32)
+X_train_std, X_test_std, y_train_std, y_test_std = train_test_split(X_std, y_std, test_size=0.33, random_state=32)
 
 
 ###################### 验证estimator的score是否单纯与归一化相关 ######################
@@ -39,6 +39,18 @@ svr_score = svr.score(X_test, y_test)
 print('svr_r2: {}\n'.format(svr_r2))
 print('svr_score: {}\n'.format(svr_score))
 print('结果：svr_r2 == svr_v_score, 两者为同一种指标\n')
+
+
+svr_std_x = LinearSVR(C=0.5)
+svr_std_x.fit(X_train_std, y_train)
+svr_std_x_y_pred = svr_std_x.predict(X_test_std)
+
+svr_std_x_score = svr_std_x.score(X_test_std, y_test)
+svr_std_x_mse = mean_squared_error(y_test, svr_std_x_y_pred)
+
+print('svr_std_x_score: {}\n'.format(svr_std_x_score))
+print('svr_std_x_mse: {}\n'.format(svr_std_x_mse))
+
 
 svr_std = LinearSVR(C=0.5)
 svr_std.fit(X_train_std, y_train_std)
